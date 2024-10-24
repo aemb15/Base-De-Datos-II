@@ -12,11 +12,10 @@ from config_vars import MONGODB_CONNECTION
 
 
 class jugador:
-    #def __init__(self):
     print("Cargando configuracion de jugador")
     client = MongoClient(MONGODB_CONNECTION)
-    db = client['Turno'] 
-    collection = db['jugador'] #Coleccion jugador dentro de la base de datos
+    db = client['Turno'] # Nombre de la base de datos
+    collection = db['jugador'] # Nombre de la Collecion en MongoDB
     print("Configuracion finalizada")
             
 
@@ -73,7 +72,7 @@ class jugador:
     @classmethod
     def actualizar_jugador(cls, _id, nombre=None, telefono=None):
         """
-        Actualizar un documento jugador por su ID
+        Actualizar un jugador
         """
         update_data = {}
         if nombre:

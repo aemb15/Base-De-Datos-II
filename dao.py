@@ -57,4 +57,17 @@ class turnoDAO:
         else:
             return jugador.consultar_jugadores()
         
+
     #cancha
+    def get_cancha(self,cancha_id=None, nombre = None, tipo_superficie = None):
+        """
+        Obtener canchas de la base de datos en función de varios atributos.
+        """
+        if cancha_id is not None:
+            return cancha.consultar_cancha_por_id(cancha_id)
+        elif nombre is not None:
+            return cancha.consultar_cancha_por_nombre(nombre)
+        elif tipo_superficie is not None:
+            return cancha.consultar_cancha_por_tipoSuperficie(tipo_superficie)
+        else:
+            return cancha.consultar_canchas()    
