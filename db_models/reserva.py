@@ -16,23 +16,24 @@ class reserva:
     print("Connecting to MongoDB")
     client = MongoClient(MONGODB_CONNECTION)
     db = client['Turno']  # Nombre de la base de datos
-    collection = db['jugador']  # Nombre de la Collecion en MongoDB
+    collection = db['reserva']  # Nombre de la Collecion en MongoDB
     print("Connection established")
 
     @classmethod
     def insertar_reserva(cls, idJugador, idCancha, fecha, horaInicio, horaFin, estado):
         """
-        Agregar una nueva cancha a la colección.
+        Agregar una nueva reserva a la colección.
         """
         reserva_data = {
-            "idJugador" = ObjectId(idJugador),
-            "idCnacha" = ObjectId(idCancha),
-            "fecha" = fecha,
-            "horaInicio" = horaInicio,
-            "horaFin" = horaFin,
-            "estado" = estado
+            "idJugador" : ObjectId(idJugador),
+            "idCnacha" : ObjectId(idCancha),
+            "fecha" : fecha,
+            "horaInicio" : horaInicio,
+            "horaFin" : horaFin,
+            "estado" : estado
         }
         result = cls.collection.insert_one(reserva_data)
+        return result.inserted_id
 
     @classmethod
     def consultar_reserva(cls, reserva_id):

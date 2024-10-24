@@ -4,13 +4,14 @@ from pymongo.server_api import ServerApi
 
 # URI de conexión a MongoDB Atlas
 #MONGODB_CONNECTION = os.getenv('MONGODB_URI')
-MONGODB_CONNECTION = "mongodb+srv://BaseDeDatosll:<95519794>@basededatosll.o8imfl1.mongodb.net/?retryWrites=true&w=majority&appName=BaseDeDatosll"
+MONGODB_CONNECTION = "mongodb+srv://BaseDeDatosll:95519794@basededatosll.o8imfl1.mongodb.net/?retryWrites=true&w=majority&appName=BaseDeDatosll"
 
 # Puedes crear el cliente MongoClient aquí si lo deseas
 client = MongoClient(MONGODB_CONNECTION, server_api=ServerApi('1'))
 
+print("")
 print(client)
-
+print("")
 """
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi

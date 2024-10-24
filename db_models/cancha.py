@@ -16,7 +16,7 @@ class cancha:
     print("Connecting to MongoDB")
     client = MongoClient(MONGODB_CONNECTION)
     db = client['Turno']  # Nombre de la base de datos
-    collection = db['jugador']  # Nombre de la Collecion en MongoDB
+    collection = db['cancha']  # Nombre de la Collecion en MongoDB
     print("Connection established")
 
     @classmethod
