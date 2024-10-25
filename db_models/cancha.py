@@ -51,8 +51,8 @@ class cancha:
         """
         Obtener una lista de cancha por tipo de superficie
         """
-        canchas_sinteticas = cls.collection.find({"tipo_superficie": tipo_superficie})
-        for cancha in canchas_sinteticas:
+        cancha_datos = cls.collection.find({"tipo_superficie": tipo_superficie})
+        for cancha in cancha_datos:
             print(f"ID: {cancha['_id']}, Nombre: {cancha['nombre']}, Tipo de Superficie: {cancha['tipo_superficie']}")
 
     

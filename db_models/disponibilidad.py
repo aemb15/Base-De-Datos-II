@@ -8,28 +8,71 @@ sys.path.append(dirname + "/db_models/")
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 from config_vars import MONGODB_CONNECTION
-from cancha import cancha
+from db_models.cancha import cancha
 
 class disponibilidad:
     print("Connecting to MongoDB")
     client = MongoClient(MONGODB_CONNECTION)
     db = client['Turno']  # Nombre de la base de datos
     collection = db['disponibilidad']  # Nombre de la Collecion en MongoDB
-    collection2 = db['cancha']
+    collection2 = db['cancha'] 
     print("Connection established")
 
-    def insertar_disponibilidad(cls, idCancha,fecha, hora, disponible):
-        """
-        Agregar una nueva disponibilidad a la coleccion
-        """
-        disponibilidad_data = ({
+ 
+    @classmethod
+    def insertar_disponibilidad(cls,_id, _idCancha,fecha,hora,estadoCancha):
+        
+        cancha_info = cls.collection2.find_one({"_id": _idCancha})
+        disponibilidad_data = {
             "_id": _id,
-            "canchaRef":{
-                "$ref": "cancha",
-                "$_id": ObjectId(_id)
-            },
             "fecha": fecha,
             "hora": hora,
-            "disponibilidad": disponible
-        })
+            "estadoCancha": estadoCancha,
+            "nombre": cancha_info["nombre"],
+            "tipo_superficie": cancha_info["tipo_superficie"]
+        }
         resultado = cls.collection.insert_one(disponibilidad_data)
+        return resultado.inserted_id
+    
+
+    @classmethod
+    def consultar_disponibilidad_hora(cls, hora):
+        """
+        Obtener la disponibilidad de la cancha
+        """
+        return cls.collection.find_one({"hora": hora})
+
+
+    @classmethod
+    def consultar_disponibilidad__estado(cls, estadoCancha):
+        """
+        Obtener la disponibilidad de la cancha por el estado
+        """
+        return cls.collection.find_one({"estadoCancha": estadoCancha})
+
+
+    @classmethod
+    def consultar_disponibilidad(cls):
+        """
+        Obtener todas las canchas de la colección.
+        """
+        return list(cls.collection.find({}))
+    
+    
+    @classmethod
+    def actualizar_disponibilidad(cls,_id, _idCancha = None,fecha = None,hora = None,estadoCancha = None):
+        """
+        Actualizar una disponibilidad
+        """
+        update_data = {}
+        if _idCancha:
+            update_data["_idCancha"] = _idCancha
+        if fecha:
+            update_data["fecha"] = fecha
+        if hora:
+            update_data["hora"] = hora
+        if estadoCancha:
+            update_data["estadoCancha"] = estadoCancha
+
+        resultado = cls.collection.update_one({"_id":_id},{"$set": update_data})
+        return resultado.modified_count

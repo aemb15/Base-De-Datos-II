@@ -10,6 +10,7 @@ from config_vars import MONGODB_CONNECTION
 
 from db_models.jugador import jugador
 from db_models.cancha import cancha
+from db_models.disponibilidad import disponibilidad
 from db_models.reserva import reserva
 
 class turnoDAO:
@@ -70,4 +71,14 @@ class turnoDAO:
         elif tipo_superficie is not None:
             return cancha.consultar_cancha_por_tipoSuperficie(tipo_superficie)
         else:
-            return cancha.consultar_canchas()    
+            return cancha.consultar_canchas()
+
+    #disponibilidad
+    def get_disponibilidad(self,disponibilidad_id = None, hora = None, estadoCancha = None):
+
+        if hora is not None:
+            return disponibilidad.consultar_disponibilidad_hora(hora)
+        if estadoCancha is not None:
+            return disponibilidad.consultar_disponibilidad__estado(estadoCancha)
+        else:
+            return disponibilidad.consultar_disponibilidad()
