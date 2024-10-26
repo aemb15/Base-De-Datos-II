@@ -54,11 +54,11 @@ class disponibilidad:
     @classmethod
     def consultar_disponibilidad(cls):
         """
-        Obtener todas las canchas de la colección.
+        Obtener todas las disponibilidad de la colección.
         """
         return list(cls.collection.find({}))
     
-    
+
     @classmethod
     def actualizar_disponibilidad(cls,_id, _idCancha = None,fecha = None,hora = None,estadoCancha = None):
         """

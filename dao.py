@@ -75,10 +75,24 @@ class turnoDAO:
 
     #disponibilidad
     def get_disponibilidad(self,disponibilidad_id = None, hora = None, estadoCancha = None):
-
+        """
+        Obtener disponibilidad de la base de datos en función de varios atributos.
+        """
         if hora is not None:
             return disponibilidad.consultar_disponibilidad_hora(hora)
         if estadoCancha is not None:
             return disponibilidad.consultar_disponibilidad__estado(estadoCancha)
         else:
             return disponibilidad.consultar_disponibilidad()
+    
+    #reserva
+    def get_reserva(self,reserva_id = None,estadoPago = None):
+        """
+        Obtener disponibilidad de la base de datos en función de varios atributos.
+        """
+        if reserva_id is not None:
+            return reserva.consultar_reserva_id(reserva_id)
+        if estadoPago is not None:
+            return reserva.consultar_reserva__estado(estadoPago)
+        else:
+            return reserva.consultar_reservas()
