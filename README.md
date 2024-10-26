@@ -6,6 +6,8 @@ Data Access Objects for soccer shifts
     • IDE or Text editor
     • Python 3.12 
     • pip install --upgrade pip
+#### Install virtualenv
+     • pip install virtualenv
 #### Create the virtual environment(Linux)
     • python3 -m venv pymongo_venv
 #### Activate the virtual environment
